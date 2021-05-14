@@ -13,3 +13,4 @@ ENV LC_ALL en_US.UTF-8
 # в соотвествии с заданием
 run apt-get install python3
 
+
