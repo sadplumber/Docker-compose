@@ -13,10 +13,10 @@ ENV LC_ALL en_US.UTF-8
 # в соотвествии с заданием
 RUN apt-get install python3
 
-RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-
-COPY /apt /etc/apt/sources.list.d/
-RUN apt-get update && apt-get install -y postgresql-11
+# и кто это сделал? И главное зачем?
+#RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+#COPY /apt /etc/apt/sources.list.d/
+#RUN apt-get update && apt-get install -y postgresql-11
 
 COPY /opt /opt/
 RUN pip install -r /opt/python-sample-app/requirements.txt
