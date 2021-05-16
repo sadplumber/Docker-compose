@@ -1,0 +1,38 @@
+version: "3.5"
+
+services:
+
+# sier-smevclient
+  app-postgres:
+    image: postgres:11-alpine
+    deploy:
+      replicas: 1
+#    ports:
+#      - 8087:8087
+#    volumes:
+#      - type: bind
+#         source: /opt/sier/templates
+#         target:/opt/templates
+#      - type: bind
+#         source: /opt/sier/keys
+#         target:/var/opt/cprocsp/keys/root
+    networks:
+      sier-net:
+        aliases:
+          - app-postgres
+
+  app-test:
+    build: python-sample-app
+    deploy:
+      replicas: 1
+    links: 
+      - app-postgres
+    networks:
+      sier-net:
+        aliases:
+          - app-test
+
+
+networks:
+  sier-net:
+    driver: overlay

@@ -11,7 +11,7 @@ WORKDIR /opt/python-sample-app/
 RUN pip3 install -r requirements.txt
 
 ENV FLASK_APP=app.py
-ENV POSTGRESQL_URL=postgresql://worker:worker@localhost/app
+ENV POSTGRESQL_URL=postgresql://worker:worker@app-postgres/app
 
 RUN flask db upgrade
 
