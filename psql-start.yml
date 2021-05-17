@@ -1,4 +1,4 @@
-version: "2.3"
+version: "3.5"
 
 services:
 
@@ -9,15 +9,19 @@ services:
 #      replicas: 1
     restart: always
     environment:
-      POSTGRES_PASSWORD: worker
 #      POSTGRES_USER: worker
 #      POSTGRES_DB: app
+#      POSTGRES_PASSWORD: worker
+#      PGDATA: /postgres
+    environment:
+      - POSTGRES_USER=worker
+      - POSTGRES_PASSWORD=worker
+      - POSTGRES_DB=app
+
     ports:
       - 5432:5432
-#    volumes:
-#      - type: bind
-#         source: /opt/sier/templates
-#         target:/opt/templates
+    volumes:
+         - ./postgres/data:/var/lib/postgresql/data
 #      - type: bind
 #         source: /opt/sier/keys
 #         target:/var/opt/cprocsp/keys/root
@@ -30,4 +34,4 @@ services:
 
 networks:
   app-test-net:
-    driver: bridge
+    external: false

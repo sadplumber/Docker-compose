@@ -1,26 +1,19 @@
-version: "2.3"
+version: "2.1"
 
 services:
 
   app-postgres:
     image: postgres:11-alpine
     container_name: app-postgres
-#    deploy:
-#      replicas: 1
     restart: always
     environment:
-      POSTGRES_PASSWORD: worker
-#      POSTGRES_USER: worker
-#      POSTGRES_DB: app
+      - POSTGRES_USER=worker
+      - POSTGRES_PASSWORD=worker
+      - POSTGRES_DB=app
     ports:
       - 5432:5432
-#    volumes:
-#      - type: bind
-#         source: /opt/sier/templates
-#         target:/opt/templates
-#      - type: bind
-#         source: /opt/sier/keys
-#         target:/var/opt/cprocsp/keys/root
+    volumes:
+         - ./postgres/data:/var/lib/postgresql/data
     networks:
       app-test-net:
         aliases:
@@ -29,20 +22,16 @@ services:
   app-test:
     container_name: app-test
     build: python-sample-app
-#    deploy:
-#      replicas: 1
     restart: always
     ports:
       - 5000:5000
     depends_on:
       - app-postgres
-        #condition: service_started
     networks:
       app-test-net:
         aliases:
           - app-test
 
-
 networks:
   app-test-net:
-    driver: bridge
+    external: false
