@@ -26,21 +26,6 @@ services:
         aliases:
           - app-postgres
 
-  app-test:
-    container_name: app-test
-    build: python-sample-app
-#    deploy:
-#      replicas: 1
-    restart: always
-    ports:
-      - 5000:5000
-    depends_on:
-      - app-postgres
-        #condition: service_started
-    networks:
-      app-test-net:
-        aliases:
-          - app-test
 
 
 networks:
