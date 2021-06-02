@@ -9,9 +9,10 @@
 И docker-compose начинает сначала собирать, потом запускать
 
 Поэтому при первой сборке
-
-```docker-compose up app-postgres -d
-docker-compose up app-test -d --build```
+```
+docker-compose up app-postgres -d
+docker-compose up app-test -d --build
+```
 
 
 
